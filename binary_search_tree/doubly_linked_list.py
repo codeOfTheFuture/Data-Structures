@@ -117,7 +117,7 @@ class DoublyLinkedList:
         # Planning
         # If LL is empty
         if not self.head and self.tail:
-            print('ERROR: Attempted to delete node not in list')
+            # print('ERROR: Attempted to delete node not in list')
             return
         # If node is both
         elif self.head is self.tail:

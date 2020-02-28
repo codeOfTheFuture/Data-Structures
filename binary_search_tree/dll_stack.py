@@ -10,18 +10,14 @@ class Stack:
     def push(self, value):
         if self.len() == 0:
             self.storage.add_to_head(value)
-            print(self.storage)
         else:
             self.storage.add_to_head(value)
-            print(self.storage)
-
         self.size += 1
         return self.size
 
 
     def pop(self):
         if self.len() == 0:
-            print('Stack is Empty')
             return None
         else :
             self.size -= 1
