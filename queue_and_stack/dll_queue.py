@@ -11,7 +11,6 @@ class Queue:
 
     def enqueue(self, value):
         if self.len() == 0 :
-            self.storage.add_to_head(value)
             self.storage.add_to_tail(value)
         else:
             self.storage.add_to_tail(value)
@@ -22,11 +21,11 @@ class Queue:
         if self.len() == 0:
             print('Stack is Empty')
             return None
-        head = self.storage.head
-        if self.storage.head == self.storage.tail:
-            self.storage.head = None
-        self.storage.remove_from_head()
-        self.size -= 1
-        return head.value
+        else:
+            self.size -= 1
+            return self.storage.remove_from_head()
+        
+
+        
     def len(self):
         return self.size

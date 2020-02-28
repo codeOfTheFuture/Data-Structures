@@ -57,6 +57,7 @@ class LRUCache:
     def set(self, key, value):
         if key in self.storage:
             self.storage[key] = value
+            self.dll.add_to_tail(self.storage[key])
         elif self.current_nodes == self.limit:
             item = self.dll.remove_from_head()
             self.storage.pop(item, None)
