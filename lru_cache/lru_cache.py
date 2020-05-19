@@ -1,3 +1,5 @@
+from doubly_linked_list import DoublyLinkedList
+
 class LRUCache:
     """
     Our LRUCache class keeps track of the max number of nodes it
@@ -7,7 +9,10 @@ class LRUCache:
     to every node stored in the cache.
     """
     def __init__(self, limit=10):
-        pass
+        self.limit = limit
+        self.current_nodes = None
+        self.dll = DoublyLinkedList()
+        self.storage = {}
 
     """
     Retrieves the value associated with the given key. Also
@@ -17,7 +22,27 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
-        pass
+        # If the key that is passed in is not in storage dict then return None
+        if key not in self.storage:
+            return None
+        else:
+            # Set the current node to be the tail of the dll
+            current_node = self.dll.tail 
+
+            # Check each node starting with the tail to see if the node value matches the key   
+            while current_node.value is not key:
+
+                # If the current node value does not match the key reassign current node to be
+                # the previous node in the dll
+                current_node = current_node.prev
+
+            # Check to see if the current node is the tail.  If it is then it does not need to be moved
+            # to the end of the dll
+            if current_node is not self.dll.tail:
+                self.dll.move_to_end(current_node)
+
+            # Return the value of the key
+            return self.storage[key]
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -30,4 +55,16 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
-        pass
+        if key in self.storage:
+            self.storage[key] = value
+            self.dll.add_to_tail(self.storage[key])
+        elif self.current_nodes == self.limit:
+            item = self.dll.remove_from_head()
+            self.storage.pop(item, None)
+            self.dll.add_to_tail(key)
+            self.storage[key] = value
+        else:
+            self.dll.add_to_tail(key)
+            self.storage[key] = value
+            self.current_nodes = self.dll.length
+

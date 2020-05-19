@@ -117,7 +117,7 @@ class DoublyLinkedList:
         # Planning
         # If LL is empty
         if not self.head and self.tail:
-            print('ERROR: Attempted to delete node not in list')
+            # print('ERROR: Attempted to delete node not in list')
             return
         # If node is both
         elif self.head is self.tail:
@@ -139,18 +139,4 @@ class DoublyLinkedList:
         
     """Returns the highest value currently in the list"""
     def get_max(self):
-        if not self.head:
-            return None
-        elif self.head == self.tail:
-            return self.head.value
-        else:
-            current = self.head.next
-            result = self.head
-
-            while True:
-                if current.value > result.value:
-                    result = current
-                if current is not self.tail:
-                    current = current.next
-                else:
-                    return result.value
+        pass
